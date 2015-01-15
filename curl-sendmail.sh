@@ -24,14 +24,13 @@ GMAIL_PASSWD= # !!!WARNING!!! Clear password
 
 ATTACHMENT_CONTENT_TYPE="image/jpeg"
 
-DEBUG_ENVELOPE=
-
+DEBUG_ENVELOPE=1
 # -----------------
 
 debug() {
     if [ "$DEBUG_ENVELOPE" ]
     then
-        cat - > >(cat - >&2) 
+        cat - | tee >(cat - >&2)
     else
         cat
     fi
@@ -69,11 +68,11 @@ ERROR=$?
 
 if [ $ERROR -ne 0 ]
 then
-    echo -n "Error" >&2
-    [ $ERROR -eq 67 ] && echo ": Auth failed, check GMAIL_LOGIN and GMAIL_PASSWD vars" >&2
+    echo -ne "\nError"
+    [ $ERROR -eq 67 ] && echo ": Auth failed, check GMAIL_LOGIN and GMAIL_PASSWD vars"
     echo
 else
-    echo "Success"
+    echo -e "\nSuccess"
 fi
 
 exit $ERROR
