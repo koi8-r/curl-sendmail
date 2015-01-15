@@ -24,7 +24,7 @@ GMAIL_PASSWD= # !!!WARNING!!! Clear password
 
 ATTACHMENT_CONTENT_TYPE="image/jpeg"
 
-DEBUG_ENVELOPE=1
+DEBUG_ENVELOPE=
 
 # -----------------
 
@@ -63,7 +63,7 @@ EOF
 ) \
     | sed s/$/$'\r'/ \
     | debug \
-    | curl -s --ssl-reqd -u "$GMAIL_LOGIN:$GMAIL_PASSWD" smtps://smtp.gmail.com:465 --mail-from "$FROM" --mail-rcpt "$TO" -T - </dev/null >/dev/null 2>&1
+    | curl -s --ssl-reqd -u "$GMAIL_LOGIN:$GMAIL_PASSWD" smtps://smtp.gmail.com:465 --mail-from "$FROM" --mail-rcpt "$TO" -T - >/dev/null 2>&1
 
 ERROR=$?
 
